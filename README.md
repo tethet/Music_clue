@@ -35,7 +35,7 @@ Music Clue
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
-- gemfile:Activerecordを追加
+- gemfile:Activerecordを追加, ActiveStorageを追加
 
 ## 使用素材
 - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
