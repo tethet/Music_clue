@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicClue</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <nav class="navbar navbar-auto bg-light">
+          <span class="navbar-right mb-0 h1">
+            Music_clue(フォントロゴ)
+          </span>
+        </nav>
+
+    
+     <% if user_signed_in? %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <i class="fa-solid fa-house-user"></i>
+              <%= link_to "マイページへ" ,user_path(current_user.id) %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to "ユーザー編集ページへ" , users_edit_path(current_user.id) %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to "ログアウト" , destroy_user_session_path, method: :delete %>
+            </li>
+             
+          <% else %>
+    
+              
+            <li class="nav-item">
+              <%= link_to "新規登録" ,new_user_registration_path %>
+            </li>
+            
+            <li class="nav-item">
+              <%= link_to "ログイン" ,user_session_path %>
+            </li>
+            <% end %>
+            </li>
+          </ul>　
+        </li>
+      </ul>
+      </div>
+        
+    </header>
+    
+    
+    
+    <%= yield %>
+    <footer>
+      
+    </footer>
+  </body>
+</html>
