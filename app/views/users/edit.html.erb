@@ -1,2 +1,9 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h2><strong>ユーザー編集</strong></h2>
+<%= form_with model: @user,url: user_path(@user.id), method: :patch  do |f| %>
+    <%= f.file_field :user_icon, accept: "image/*" %>
+    
+    <p>ユーザーネーム</p>
+    <%= f.text_field :user_name %>
+
+    <%= f.submit '変更を保存' %>
+<% end %>

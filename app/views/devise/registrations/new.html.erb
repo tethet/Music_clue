@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2><strong>新規登録</strong></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -17,12 +17,21 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :もう一度入力して下さい %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  
+  初めてご利用される方は必ず <%= link_to "利用規約", music_clue_agreement_path %> をご確認ください
+  <div class="field text-left">
+    <%= f.check_box :accepted ,{},checked_value = "true",unchecked_value = "false" %>
+    <%= f.label '利用規約に同意する' %>
+  </div>
+
+
+
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録をする" %>
   </div>
 <% end %>
 

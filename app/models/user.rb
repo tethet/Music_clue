@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   
   has_one_attached :user_icon
+  validates :accepted, presence: {message: 'を入力してください'}
   
   # def get_user_icon
   #   unless user_icon.attached?

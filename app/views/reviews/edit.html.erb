@@ -1,2 +1,18 @@
-<h1>Reviews#edit</h1>
-<p>Find me in app/views/reviews/edit.html.erb</p>
+<h3><strong>投稿編集</strong></h3>
+<%= form_with model: @review,url: review_path(@review.id), method: :patch  do |f| %>
+<p>曲名</p>
+<%= f.text_field :music_title %>
+
+<p>URL</p>
+<%= f.text_field :music_url %>
+
+<p>アーティスト名</p>
+<%= f.text_field :music_artist_name %>
+
+<p>ジャンル</p>
+<%= f.text_field :music_genre %>
+
+<p>レビュー本文</p>
+<%= f.text_area :music_review %>
+
+ <%= f.submit '投稿する' %>

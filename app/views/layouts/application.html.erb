@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -25,7 +25,13 @@
         <li class="nav-item">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <i class="fa-solid fa-house-user"></i>
+              <i class="fa-sharp fa-solid fa-house"></i>
+            </li>
+            <li class="nav-item">
+               <%= link_to "新規投稿を" ,user_path(current_user.id) %>
+            </li>
+            <li class="nav-item">
+              <i class="fa-regular fa-user"></i>
               <%= link_to "マイページへ" ,user_path(current_user.id) %>
             </li>
             

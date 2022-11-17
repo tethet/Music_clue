@@ -1,1 +1,12 @@
 <h1>Music_clue topページ</h1>
+<% @reviews.each do |review| %>
+ <%= link_to image_tag review.user.user_icon, user_path(user.id), class: "rounded-circle" %>
+ <%= link_to review.user.user_name, user_path(user.id) %>
+ <%= review.music_title %>
+ <%= review.music_url %>
+ <%= review.music_artist_name %>
+ <%= review.music_genre %>
+ <%= link_to "レビュー詳細へ", review_path(review.id) %>
+ いいね機能は最後
+ <% end %>
+ <%= paginate @reviews %>
