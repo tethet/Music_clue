@@ -1,2 +1,8 @@
-user:
-  accepted: 利用規約、及び、個人情報の取扱に同意する
+ja:
+  activercord:
+    models:
+      email: "ユーザー"
+    attributes:
+      user:
+        user_name: "名前"
+        accepted: "利用規約、及び、個人情報の取扱に同意する"

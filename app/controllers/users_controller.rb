@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+   before_action :set_user, only: [:favorite]
+  
   def show
     @user = User.find(params[:id])
-    @review = @user.review
-    @reviews = @review.page(params[:page])
+    @reviews = @user.reviews.page(params[:page])
   end
 
   def edit
@@ -10,6 +11,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to top_path
   end
   
   def update
@@ -17,12 +21,25 @@ class UsersController < ApplicationController
     @user.update(user_params)
     redirect_to user_path(@user.id)
   end
+  
+  def favorite
+    favorites = Favorite.where(user_id: @user.id).pluck(:review_id)
+    @favorite_posts = Review.find(favorites)
+  end
+
 
   def ending
+    @user = User.find(params[:id])
   end
+  
+  
   
   private
   def user_params
-    params.require(:user).permit(:user_name, :user_icon)
+    params.require(:user).permit(:email, :user_icon)
   end 
+  
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

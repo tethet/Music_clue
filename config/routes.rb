@@ -15,12 +15,18 @@ Rails.application.routes.draw do
   devise_for :users
   get 'homes/top' => 'homes#top', as: 'top' 
   get  'music_clue/agreement'  => 'homes#agreement'
-  resources :reviews, only: [:show, :edit, :update, :destroy, :create] do
+  resources :reviews, only: [:new, :show, :edit, :update, :destroy, :create] do
+   resources :favorites, only: [:create, :destroy]
    post 'comment' => 'comments#create'
   end
-  resources :favorites, only: [:index,:create, :destroy]
-  resources :users, only: [:show, :edit, :destroy, :update]
-  get 'users/ending'
+  resources :users, only: [:show, :edit, :destroy, :update] do
+  member do
+    get :favorite
+    get :ending
+  end
+  end
+  get "search" => "searches#search"
+ 
   
   
   # get  "tweets/new"  => "tweets#new"

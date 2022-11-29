@@ -3,18 +3,32 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   
   has_one_attached :user_icon
+  # validates :email, uniqueness: true
   validates :accepted, presence: {message: 'を入力してください'}
   
-  # def get_user_icon
-  #   unless user_icon.attached?
-  #     file_path = Rails.root.join
-  #   end
-  # end
+  def get_user_icon
+    unless user_icon.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      user_icon.attach(io:File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    user_icon
+  end
+  
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("email LIKE?", "#{word}")
+    elsif search == "partial_match"
+      @user = User.where("email LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
 end
 
 # controller側

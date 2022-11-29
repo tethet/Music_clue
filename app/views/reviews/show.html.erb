@@ -1,5 +1,9 @@
-<%= @review_user.user_icon %>
-<%= @review_user.user_name %>
+<%#= @review_user.get_user_icon%>
+<%#= image_tag @review_user.get_user_icon, class: "rounded-circle" %>
+<%= link_to user_path(@review_user.id), class: "rounded-circle" do %> 
+    <%= image_tag(@review_user.get_user_icon) %>
+    <% end %>
+<%= @review_user.email %>
 
 <h2>レビュー詳細</h2>
 <p>投稿日時</p>
@@ -20,20 +24,41 @@
 <p>レビュー</p>
 <%= @review.music_review %>
 
-<%= link_to "レビューを編集する", edit_review_path(@review.id) %>
-<%= link_to "レビューを削除する", review_path(review.id) %>
-
-<p>コメントを送信</p>
-<%= form_with model: [@review, @comment]  do |f| %>
- <%= f.text_area :comment %>
- <%= f.submit '送信' %>
+<% if current_user %>
+    <%= link_to "レビューを編集する", edit_review_path(@review.id) %>
+    <%= link_to "レビューを削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    
+     <% if @review.favorited_by?(current_user) %>
+        <p>
+          <%= link_to review_favorite_path(@review), method: :delete do %>
+            <i class="fas fa-thumbs-up"></i>
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to review_favorites_path(@review), method: :post do %>
+            <i class="fal fa-thumbs-up"></i>
+          <% end %>
+        </p>
+     <% end %>
+    
+    <p>コメントを送信</p>
+    <%= form_with url: @review.id.to_s + "/comment", model: Comment.new, method: :post do |f| %>
+     <%= f.text_area :comment %>
+     
+     <%= f.submit '送信' %>
+    
+    <% end %>
+    
+    <% @review.comments.each do |comment| %>
+    <%= link_to user_path(comment.user.id), class: "rounded-circle" do %> 
+    <%= image_tag(comment.user.get_user_icon) %>
+    <%= comment.user.email %>
+    <% end %>
+    <p>投稿日時</p>
+    <%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+    <%= comment.comment %>
+    <% end %>
+    <%= paginate @comments %>
 
 <% end %>
-
-<% @review.comments.each do |comment| %>
-<p><%= link_to image_tag comment.user.user_icon,  class="rounded-circle" %></p>
-<p>投稿日時</p>
-<%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
-<%= comment.comment %>
-<% end %>
-<%= paginate @comments %>

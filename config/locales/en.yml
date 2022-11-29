@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      user: 'User' # <locale>.activerecord.models.<model name>
+    attributes:
+      user:
+        user_name: 'name' # <locale>.activerecord.attributes.<model name>.<attribute name>
+        password: 'password'
+        email: 'test-email'

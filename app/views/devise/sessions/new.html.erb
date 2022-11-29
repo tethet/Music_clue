@@ -2,12 +2,12 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :ユーザーネーム %><br />
-    <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name" %>
+    <%= f.label :"ユーザーネーム" %><br />
+    <%= f.text_field :email, autofocus: true, autocomplete: "user_name" %>
   </div>
 
   <div class="field">
-    <%= f.label :パスワード %><br />
+    <%= f.label "パスワード" %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 

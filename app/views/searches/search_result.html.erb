@@ -1,0 +1,19 @@
+<h2>検索結果</h2>
+  <!--検索対象モデルがUserの時 -->
+  <% if @range == "User" %>
+      <% @users.each do |user| %>
+        <%= user.email %>
+      <% end %>
+  <% else %>
+    <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+      <% @reviews.each do |review| %>
+         <%= link_to image_tag(review.user.get_user_icon), user_path(review.user.id), class: "rounded-circle" %>
+         <%= link_to review.user.email, user_path(review.user.id) %>
+         <%= review.music_title %>
+         <%= review.music_url %>
+         <%= review.music_artist_name %>
+         <%= review.music_genre %>
+         <%= link_to "レビュー詳細へ", review_path(review.id) %>
+         <% end %>
+      <% end %>
+  <% end %>
