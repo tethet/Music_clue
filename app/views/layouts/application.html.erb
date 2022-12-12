@@ -11,71 +11,76 @@
   </head>
 
   <body>
-    <header class ="p-3 mb-3 border-bottom">
-      <div class="container">
-        <div class ="d-flex flex-warap align-items-center justify-content-center justify-content-lg-start" >
-          
-          <a href="/homes/top" class="d-flex align-items-center mb-2 mb-1g-0 text-dark text-decoration-none" >
-            <svg class="b1 me-2" width="40" height="32" role="img" aria-label="Musicclue">
-               <%= link_to image_tag("/assets/logo.jpg"), top_path %>
-            </svg>
-          </a>
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          </ul>
-          
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <%= form_with url: search_path, local: true, method: :get do |f| %>
-            <%= f.text_field :word %>
-            <%= f.select :range, options_for_select([['User'], ['Review']]) %>
-            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
-            <%= f.submit "検索", class: "btn btn-primary" %>
-            <% end %>
-          </form>
+    <div class="p-3 mb-2 bg-transparent text-white">
+      <header class ="p-3 mb-3 border-bottom">
+          <div class="container">
+            <div class ="d-flex flex-warap align-items-center justify-content-center justify-content-lg-start" >
+              
+              <a href="/homes/top" class="d-flex align-items-center mb-2 mb-1g-0 text-dark text-decoration-none" >
+                <svg class="b1 me-2" width="40" height="32" role="img" aria-label="Musicclue">
+                   <%= link_to image_tag("/assets/music_clue.png"), top_path %>
+                </svg>
+              </a>
+              <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              </ul>
+              
+              <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">-->
+                <%= form_with url: search_path, local: true, method: :get do |f| %>
+                <%= f.text_field :word %>
+                <%= f.select :range, options_for_select([['User'], ['Review']]) %>
+                <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["部分一致","partial_match"]]) %>
+                <%= f.submit "検索", class: "btn btn-primary" %>
+                <% end %>
+              <!--</form>-->
+        
     
-
-<ul class="navbar-nav">
-  <!-- ドロップダウンメニュー -->
-  <% if user_signed_in? %>
-  <li class="nav-item dropdown">
-      <p class="nav-link dropdown-toggle" 
-        href="#" 
-        id="navbarDropdown" 
-        role="button" 
-        data-toggle="dropdown" 
-        aria-haspopup="true" 
-        aria-expanded="false"
-        rounded="rounded-circle">
-          <%= image_tag current_user.get_user_icon, size: "100x100" %>
-      </p>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <i class="fas fa-pen-square"></i>
-              <%= link_to "新規投稿" ,new_review_path, {class: "dropdown-item"}%>
-              
-              <i class="fas fa-user"></i>
-              <%= link_to "マイページ", user_path(current_user.id), {class: "dropdown-item"} %>
-              
-              <i class="fas fa-user-cog"></i>
-              <%= link_to "ユーザー編集ページへ" , edit_user_path(current_user.id), {class: "dropdown-item"} %>
-              
-              <i class="fas fa-sign-out-alt"></i>
-              <%= link_to "ログアウト" , destroy_user_session_path, { method: :delete, class: "dropdown-item" } %>
-              
-            <% else %>
-              <i class="fas fa-user-plus"></i>
-              <%= link_to "新規登録" ,new_user_registration_path, {class: "dropdown-item"} %>
-              
-              <i class="fas fa-sign-in-alt"></i>
-              <%= link_to "ログイン" ,user_session_path, {class: "dropdown-item"} %>
-          </div>
-          <% end %>
-  </li>
-</ul>
+    <ul class="navbar-nav">
+      <!-- ドロップダウンメニュー -->
+      <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+          <p class="nav-link dropdown-toggle" 
+            href="#" 
+            id="navbarDropdown" 
+            role="button" 
+            data-toggle="dropdown" 
+            aria-haspopup="true" 
+            aria-expanded="false"
+            style="margin-left: 20px;">
+              <%= image_tag current_user.get_user_icon, size: "100x100", class: "rounded-circle" %>
+          </p>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <div class="form-inline">
+                  <i class="fas fa-pen-square"></i>
+                  <%= link_to "新規投稿" ,new_review_path, {class: "dropdown-item"}%>
+                </div>
+                  
+                  <i class="fas fa-user"></i>
+                  <%= link_to "マイページ", user_path(current_user.id), {class: "dropdown-item"} %>
+                  
+                  <i class="fas fa-user-cog"></i>
+                  <%= link_to "ユーザー編集ページへ" , edit_user_path(current_user.id), {class: "dropdown-item"} %>
+                  
+                  <i class="fas fa-sign-out-alt"></i>
+                  <%= link_to "ログアウト" , destroy_user_session_path, { method: :delete, class: "dropdown-item" } %>
+                  
+                <% else %>
+                  <i class="fas fa-user-plus"></i>
+                  <%= link_to "新規登録" ,new_user_registration_path, {class: "dropdown-item"} %>
+                  
+                  <i class="fas fa-sign-in-alt"></i>
+                  <%= link_to "ログイン" ,user_session_path, {class: "dropdown-item"} %>
+              </div>
+              <% end %>
+      </li>
+    </ul>
 </header>
-<%= yield %>
+    </div>
+  <%= yield %>
+</div>
 
   <footer>
-      <svg class="b1 me-2" width="40" height="32" role="img" aria-label="Musicclue">
-        <%= link_to image_tag("/assets/logo.jpg"), top_path %>
+      <svg class="b1 me-2" width="40" height="32" role="img" aria-label="Musicclue" text="center">
+        <%= link_to image_tag("/assets/music_clue.png"), top_path %>
       </svg>
       <div>Logo generated by <a href="https://www.designevo.com/" title="Free Online Logo Maker">DesignEvo free logo designer</a></div>
   </footer>

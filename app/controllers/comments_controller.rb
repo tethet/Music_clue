@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+   protect_from_forgery
   def create
     @review = Review.find(params[:review_id])
     @comment = @review.comments.new(comment_params)

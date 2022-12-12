@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @review = Review.find(params[:id])
     @review_user = @review.user
     @comment = Comment.new

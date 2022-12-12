@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
    before_action :set_user, only: [:favorite]
+   before_action :user_admin_flag, only: [:ending]
   
   def show
     @user = User.find(params[:id])
@@ -29,6 +30,8 @@ class UsersController < ApplicationController
 
 
   def ending
+  　byebug
+  　puts "==================================================="
     @user = User.find(params[:id])
   end
   
@@ -41,5 +44,14 @@ class UsersController < ApplicationController
   
   def set_user
     @user = User.find(params[:id])
+  end
+  
+  def user_admin_flag
+    @user = User.find(params[:id])
+    if current_user.admin_flag == false
+      redirect_to top_path
+    else
+      render action: "ending"
+    end
   end
 end

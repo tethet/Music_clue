@@ -17,14 +17,14 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       user_icon.attach(io:File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    user_icon
+    user_icon.variant(resize_to_limit: [100, 100]).processed
   end
   
   def self.looks(search, word)
     if search == "perfect_match"
-      @user = User.where("email LIKE?", "#{word}")
+      where(email: word)
     elsif search == "partial_match"
-      @user = User.where("email LIKE?","%#{word}%")
+      where("email LIKE?","%#{word}%")
     else
       @user = User.all
     end

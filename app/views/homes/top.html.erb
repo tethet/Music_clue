@@ -1,14 +1,49 @@
-<h1>Music_clue topページ</h1>
-<% @reviews.each do |review| %>
- <%#= link_to image_tag(review.user.get_user_icon), user_path(review.user.id), class: "rounded-circle" %>
- <%= link_to user_path(review.user.id), class: "rounded-circle" do %> 
-    <%= image_tag(review.user.get_user_icon) %>
-    <% end %>
- <%= link_to review.user.email, user_path(review.user.id) %>
- <%= review.music_title %>
- <%= review.music_url %>
- <%= review.music_artist_name %>
- <%= review.music_genre %>
- <%= link_to "レビュー詳細へ", review_path(review.id) %>
- <% end %>
- <%= paginate @reviews %>
+<div class="card-list-container py-5">
+ <h2 class="col">トップ</h2>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+     
+         <% @reviews.each do |review| %>
+         <div class="row">
+         <div class="col-md-2" style="padding: 20px;">
+          
+          <%= link_to user_path(review.user.id) do %> 
+           <%= image_tag review.user.get_user_icon, class: "rounded-circle" %>
+          <% end %>
+      　　　　</div>
+        <div class="card-body">
+         
+          <div class="col">
+           <ul class="list-unstyled">
+            <li class="list-item"><%= link_to review.user.email, user_path(review.user.id) %></li>
+            <li class="list-item">曲名  <%= review.music_title %></li></br>
+            
+            <li class="list-item">URL    <%= review.music_url %></li>
+            <li class="list-item">アーティスト    <%= review.music_artist_name %></li>
+            <li class="list-item">ジャンル    <%= review.music_genre %></li>
+           </ul>
+          </div>
+          
+         </div>
+         <div class="col">
+          <%= review.created_at.strftime('%Y/%m/%d %H:%M') %>
+          </div>
+          </div>
+          <div class="card-footer">
+            <%= link_to "レビュー詳細へ", review_path(review.id) %>
+          </div>
+           <% end %>
+         
+       <div class="d-flex align-items-center justify-content-center"><%= paginate @reviews %></div>
+   </div>
+ </div>
+ 
+ 
+ 
+<!-- <div class="media">-->
+<!--  <img class="d-flex align-self-start mr-3" src="/images/pathToYourImage.png" alt="Generic placeholder image">-->
+<!--  <div class="media-body">-->
+<!--    <h5 class="mt-0">Top-aligned media</h5>-->
+<!--    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>-->
+<!--    <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>-->
+<!--  </div>-->
+<!--</div>-->

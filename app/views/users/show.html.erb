@@ -1,21 +1,78 @@
-<h2><strong>ユーザー詳細</strong></h2>
-<%= image_tag @user.user_icon, class: "rounded-circle" %>
-<%= @user.email %>
-<%= @user.id %>
-<%= link_to "いいねした投稿", favorite_user_path(@user) %>
-<%= link_to "ユーザー編集", edit_user_path(@user) %>
-
-<% @reviews.each do |review| %>
- <%#= link_to image_tag(@user.user_icon), user_path(@user.id), class: "rounded-circle" %>
- <%= link_to user_path(review.user.id), class: "rounded-circle" do %> 
-    <%= image_tag(review.user.get_user_icon) %>
+<div class="container">
+ <h2 class="col"><strong>ユーザー詳細</strong></h2>
+  <div class="row">
+   <div class="col-2">
+    <%= image_tag @user.get_user_icon, class: "rounded-circle" %>
+   </div>
+   <div class="col-4">
+     <h2><%= @user.email %></h2>
+   </div>
+  </div>
+  <div class="row" style="padding: 20px;">
+   <dov class="col-3">
+   </dov>
+   <div class="col-7">
+      <button type="button" class="btn btn-info" style="margin: 20px;">
+       <%= link_to "いいねした投稿", favorite_user_path(@user) %>
+      </button>
+      
+      <button type="button" class="btn btn-secondary" style="margin: 20px;">
+       <% if user_signed_in? %>
+       <% if current_user == @user || current_user.admin_flag? %>
+       <%= link_to "ユーザー編集", edit_user_path(@user) %>
+       <% end %>
+       <% end %>
+      </button>
+   </div>
+  </div>
+  
+  <div class="card-list-container py-5">
+   <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <% @reviews.each do |review| %>
+     <div class="row">
+      <div class="col-md-2" style="padding: 20px;">
+        <%= link_to user_path(review.user.id) do %> 
+          <%= image_tag review.user.get_user_icon, class: "rounded-circle" %>
+        <% end %>
+      </div>
+    <div class="card-body">
+     <div class="col">
+      <ul class="list-unstyled">
+       <li class="list-item"><%= link_to @user.email, user_path(@user.id) %></li>
+       <li class="list-item">曲名   <%= review.music_title %></li>
+       <li class="list-item">URL    <%= review.music_url %></li>
+       <li class="list-item">アーティスト   <%= review.music_artist_name %></li>
+       <li class="list-item">ジャンル    <%= review.music_genre %></li>
+      </ul>
+     </div>
+    </div>
+     <div class="col">
+      <%= review.created_at.strftime('%Y/%m/%d %H:%M') %>
+      </div>
+      </div>
+     <div class="card-footer">
+      <%= link_to "レビュー詳細へ", review_path(review.id) %>
+     </div>
+      <% end %>
+     </div>
+     <div class="d-flex align-items-center justify-content-center"><%= paginate @reviews %></div>
+   </div>
+  </div>
+  <%#= link_to image_tag(@user.user_icon), user_path(@user.id), class: "rounded-circle" %>
+  
+ <div class ="row">
+  <div class ="col-9"></div>
+  <div class="col-3">
+    <% if user_signed_in? %>
+    <% if current_user.admin_flag? %>
+     <button type="button" class="btn btn-danger">
+      <a href="#" class="link-light">
+       <%= link_to "ユーザーを消去する", ending_user_path(@user) %>
+      </a>
+     </button>
     <% end %>
- <%= link_to @user.email, user_path(@user.id) %>
- <%= review.music_title %>
- <%= review.music_url %>
- <%= review.music_artist_name %>
- <%= review.music_genre %>
- <%= link_to "レビュー詳細へ", review_path(review.id) %>
- <% end %>
- <%= link_to "ユーザーを消去する", ending_user_path(@user) %>
- <%= paginate @reviews %>
+   <% end %>
+  </div>
+ </div>
+</div>
+

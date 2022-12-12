@@ -8,9 +8,17 @@ class Review < ApplicationRecord
  
  def self.looks(search, word)
     if search == "perfect_match"
-      @review = Review.where("music_title LIKE? OR music_url LIKE?","music_artist_name LIKE? OR music_genre LIKE? OR music_review LIKE?","#{word}","#{word}")
+      @review = Review.or(where(music_title: word))
+                      .or(where(music_url: word))
+                      .or(where(music_artist_name: word))
+                      .or(where(music_genre: word))
+                      .or(where(music_review: word))
     elsif search == "partial_match"
-      @review = Review.where("music_title LIKE? OR music_url LIKE?","music_artist_name LIKE? OR music_genre LIKE? OR music_review LIKE?","#{word}","#{word}")
+      @review = Review.or(where(music_title: word))
+                      .or(where(music_url: word))
+                      .or(where(music_artist_name: word))
+                      .or(where(music_genre: word))
+                      .or(where(music_review: word))
     else
       @review = Review.all
     end
