@@ -13,12 +13,14 @@
    </dov>
    <div class="col-7">
       <button type="button" class="btn btn-info" style="margin: 20px;">
+        <i class="fas fa-thumbs-up"></i>
        <%= link_to "いいねした投稿", favorite_user_path(@user) %>
       </button>
       
-      <button type="button" class="btn btn-secondary" style="margin: 20px;">
        <% if user_signed_in? %>
        <% if current_user == @user || current_user.admin_flag? %>
+      <button type="button" class="btn btn-secondary" style="margin: 20px;">
+       <i class="fas fa-user-cog"></i>
        <%= link_to "ユーザー編集", edit_user_path(@user) %>
        <% end %>
        <% end %>
@@ -34,7 +36,7 @@
         <%= link_to user_path(review.user.id) do %> 
           <%= image_tag review.user.get_user_icon, class: "rounded-circle" %>
         <% end %>
-      </div>
+     </div>
     <div class="card-body">
      <div class="col">
       <ul class="list-unstyled">

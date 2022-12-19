@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
    before_action :set_user, only: [:favorite]
    before_action :user_admin_flag, only: [:ending]
+   before_action :authenticate_user!, only: [:edit, :new, :destroy]
   
   def show
     @user = User.find(params[:id])
@@ -30,8 +31,6 @@ class UsersController < ApplicationController
 
 
   def ending
-  　byebug
-  　puts "==================================================="
     @user = User.find(params[:id])
   end
   

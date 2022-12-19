@@ -1,6 +1,24 @@
 <h2>ユーザー消去確認</h2>
-<h1>本当に『<%= @user.email %>』のアカウントを削除しますか？</h1>
+<h1 class="text-center mb-4 mt-1" "border m-3">>本当に『<%= @user.email %>』のアカウントを削除しますか？</h1>
 
-<%= link_to "削除しない", user_path(@user.id) %>
-<%= link_to "ユーザーを消去する", user_path(@user), method: :delete %>
-
+<div class="container">
+    <div class="row" style="margin: 20px;">
+     <div class="col-4"></div>
+      <div class="col-6">
+          <button type="button" class="btn btn-success">
+            <%= link_to "削除しない", user_path(@user.id) %>
+          </button>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    
+    <div class="row"style="margin: 20px;">
+     <div class="col-4"></div>
+      <div class="col-6">
+          <button type="button" class="btn btn-danger">
+              <%= link_to "ユーザーを消去する", user_path(@user), method: :delete %>
+          </button>
+      </div>
+     <div class="col-2"></div>
+    </div>
+</div>

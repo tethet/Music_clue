@@ -1,21 +1,32 @@
-<h3><strong>投稿</strong></h3>
-<%= form_with model: @review,url: reviews_path  do |f| %>
-<p>曲名</p>
-<%= f.text_field :music_title %>
+<div class="container">
+    <div class="row">
+     <dov class="col-4">
+        <h3><strong>投稿</strong></h3>
+     </dov>
+    </div>
+    <div class="row">
+     <div class="col-2"></div>
+      <div class="10">
+            <ul class="list-group list-group-flush">
+                <%= form_with model: @review,url: reviews_path  do |f| %>
+             <li class="list-group-item">曲名　　　　　　　　　<%= f.text_field :music_title %></li>
+                
+             <li class="list-group-item"> URL　　　　　　　　　<%= f.text_field :music_url %></li>
+               
+             <li class="list-group-item">アーティスト名　　　　<%= f.text_field :music_artist_name %></li>
+                
+             <li class="list-group-item">ジャンル　　　　　　　<%= f.text_field :music_genre %></li>
+            </ul>
+                
+            
+            <ul class="list-group list-group-flush" style="margin-top: 30px;">
+                レビュー本文
+                <%= f.text_area :music_review %></br>
+            </ul>
+                 　　　　　　　　　　　　　　　　　　　　　　<%= f.submit '投稿する' %>
+                
+                <% end %>
 
-<p>URL</p>
-<%= f.text_field :music_url %>
-
-<p>アーティスト名</p>
-<%= f.text_field :music_artist_name %>
-
-<p>ジャンル</p>
-<%= f.text_field :music_genre %>
-
-<p>レビュー本文</p>
-<%= f.text_area :music_review %>
-
- <%= f.submit '投稿する' %>
-
-<% end %>
-
+      </div>
+    </div>
+</div>
