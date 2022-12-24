@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   # get 'reviews/update'
   # get 'reviews/destroy'
   devise_for :users
-  get 'homes/top' => 'homes#top', as: 'top' 
+  
+  
+  root 'homes#top'
+  # get '/top' => 'homes#top', as: 'top' 
   get  'music_clue/agreement'  => 'homes#agreement'
   resources :reviews, only: [:new, :show, :edit, :update, :destroy, :create] do
    resources :favorites, only: [:create, :destroy]

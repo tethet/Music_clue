@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     @review.save
-    redirect_to top_path
+    redirect_to root_path
   end
 
   def show
@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
   def destroy
    @review = Review.find(params[:id])
    @review.destroy
-   redirect_to top_path
+   redirect_to root_path
   end
   
   private

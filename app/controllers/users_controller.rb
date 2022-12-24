@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to top_path
+    redirect_to root_path
   end
   
   def update
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   def user_admin_flag
     @user = User.find(params[:id])
     if current_user.admin_flag == false
-      redirect_to top_path
+      redirect_to root_path
     else
       render action: "ending"
     end
