@@ -13,20 +13,21 @@
                 
                  <div class="col-6"><%= @review_user.email %></div>
                  <div class="col-1">
+                    <% if user_signed_in? %>
                      <% if @review.favorited_by?(current_user) %>
                             <p>
                               <%= link_to review_favorite_path(@review), method: :delete do %>
                                 <i class="fas fa-thumbs-up fa-3x"></i>
                               <% end %>
                             </p>
-                            <% else %>
+                     <% else %>
                             <p>
                               <%= link_to review_favorites_path(@review), method: :post do %>
                                 <i class="far fa-thumbs-up fa-3x"></i>
                               <% end %>
                             </p>
                      <% end %>
-                     
+                    <% end %>
                      
                  </div>
                   <div class="col-3">

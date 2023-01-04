@@ -3,7 +3,12 @@ class Review < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
  def favorited_by?(user)
+   if user.present?
     favorites.exists?(user_id: user.id)
+   else
+    false
+   end
+    
  end
  
  def self.looks(search, word)
