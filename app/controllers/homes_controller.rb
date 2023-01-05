@@ -1,7 +1,6 @@
 class HomesController < ApplicationController
   def top
-    @reviews = Review.page(params[:page])
-    
+    @reviews = Review.order(created_at: "DESC").page(params[:page])
   end
 
   def agreement
